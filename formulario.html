@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registro Asistencia</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    button {
+      background: #007BFF;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>📘 Registro de Asistencia</h2>
+
+  <input id="nombre" placeholder="Nombre" />
+  <input id="id" placeholder="ID" />
+  <input id="cel" placeholder="Celular" />
+
+  <button onclick="registrar()">Registrar</button>
+
+  <p id="msg"></p>
+</div>
+
+<script>
+function registrar() {
+  const nombre = document.getElementById("nombre").value;
+  const id = document.getElementById("id").value;
+  const cel = document.getElementById("cel").value;
+
+  if (!nombre || !id || !cel) {
+    document.getElementById("msg").innerText = "❌ Completa todos los campos";
+    return;
+  }
+
+  const data = {
+    nombre,
+    id,
+    celular: cel,
+    fecha: new Date()
+  };
+
+  // Guardar en navegador
+  let registros = JSON.parse(localStorage.getItem("asistencias")) || [];
+  registros.push(data);
+
+  localStorage.setItem("asistencias", JSON.stringify(registros));
+
+  document.getElementById("msg").innerText = "✅ Asistencia registrada";
+}
+</script>
+
+</body>
+</html>
